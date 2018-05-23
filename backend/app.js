@@ -38,6 +38,12 @@ app.post('/upload', (req, res, next) => {
 
 })
 
+
+app.get('/cactus', function(req, res) {
+    // We must end the request when we are done handling it
+    res.end();
+  });
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   const err = new Error('Not Found');
