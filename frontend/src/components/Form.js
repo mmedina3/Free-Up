@@ -3,9 +3,11 @@ import React from "react";
 class Form extends React.Component{
     render(){
         return(
-            <form onSubmit={this.props.getCity}>
+            <form onSubmit={this.props.getInfo}>
+                <input type="text" name="name" placeholder="Name..."/>
+                <input type="text" name="email" placeholder="Email..."/>
                 <input type="text" name="city" placeholder="City..."/>
-                <button>Search City</button>
+                <button>Submit</button>
             </form>
         );
     }

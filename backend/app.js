@@ -8,9 +8,10 @@ const fileUpload = require('express-fileupload');
 const cors = require('cors');
 const mysql = require('mysql');
 
+
 const app = express();
 
-const SELECT_ALL_IMAGES_QUERY = 'SELECT * FROM post';
+const SELECT_IMAGE_QUERY = 'SELECT * FROM post'
 
 //Hide this part once it is working
 const connection = mysql.createConnection({
@@ -43,7 +44,6 @@ app.post('/upload', (req, res, next) => {
     if (err) {
       return res.status(500).send(err);
     }
-
     res.json({file: `public/images/${req.body.filename}.jpg`});
   });
 
@@ -55,49 +55,30 @@ app.get('/cactus', function(req, res) {
     res.end();
   });
 
-  // connection to database for user
-connection.connect(err=>{
-  if(err) {
-    return err;
-  }
-  const name = {Name: 'Michelle', email: 'mmmm@gmail.com', location: 'SF'};
-  connection.query('INSERT INTO user (name, email, location) VALUES (\'Michelle\', \'mmmm@gmail.com\', \'SF\')', (err, results, fields) => {
-    if(err) throw err;
-  })
-});
-
-//connection to database for post
-connection.connect(err=>{
-  if(err) {
-    return err;
-  }
-  const name = {image_data: 'asdf', availability: 'yes', date_added: '1/10/11', date_created: '1/11/11', user__id: '2'};
-  connection.query('INSERT INTO post (image_data, availability, date_added, date_created, user__id) VALUES (\'asdf\', \'asdf\', \'1/10/11\', \'1/11/11\', \'2\')', (err, results, fields) => {
-    if(err) throw err;
-  })
-});
-
-
-// app.use(cors());
-
-// app.get('/public/images', (req, res) => {
-//   const {image_data} = req.query;
-//   // const INSERT_IMAGE_QUERY = `INSERT INTO post (image_data) SET ('${image_data}')`
-//   const url = {image_data: `${image_data}`};
-//   connection.query('INSERT INTO post SET ?', url, (err, results) => {
-//     if(err){
-//       return res.send(err)
-//     }
-//     else{
-//       return res.send('successful add')
-//     }
-//   });
+  //connection to database for user
+// connection.connect(err=>{
+//   if(err) {
+//     return err;
+//   }
+//   const name = {Name: 'Michelle', email: 'mmmm@gmail.com', location: 'SF'};
+//   connection.query('INSERT INTO user (name, email, location) VALUES (\'Michelle\', \'mmmm@gmail.com\', \'SF\')', (err, results, fields) => {
+//     if(err) throw err;
+//   })
 // });
 
-// const url = {};
-// INSERT INTO post (image_data) SET ?, url, (err, results, fields) => {
-
-// }
+// app.get('/public/images', (req, res) => {
+//     // const {image_data} = req.query;
+//     // const INSERT_IMAGE_QUERY = req.url;
+//     const url = { imageURL: `http://localhost:8000/${body.file}` };
+//     connection.connect(err=>{
+//       if(err) {
+//       return err;
+//        }
+//     connection.query('INSERT INTO post (image_data) SET ?', url, (err, results, fields) => {
+//     return res.send('successful add')
+//     })
+//    });
+// });
 
 
 
