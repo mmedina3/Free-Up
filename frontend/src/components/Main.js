@@ -15,36 +15,38 @@ class Main extends React.Component {
     ev.preventDefault();
 
     const data = new FormData();
+    console.log(this.uploadInput.files[0]);
     data.append('file', this.uploadInput.files[0]);
     data.append('filename', this.fileName.value);
 
-    fetch('http://localhost:8000/upload', {
+    console.log(data)
+    console.log(JSON.stringify(data))
+    fetch('/upload', {
       method: 'POST',
-      body: data,
+      body: data
     }).then((response) => {
+       //console.log(response.json())
       response.json().then((body) => {
-        this.setState({ imageURL: `http://localhost:8000/${body.file}` });
+        console.log(body)
+        this.setState({ imageURL: `/${body.file}` });
       });
     });
-  }
+}
+
 
   render() {
     return (
       <form onSubmit={this.handleUploadImage}>
-        <div>
-          <input ref={(ref) => { this.uploadInput = ref; }} type="file" />
-        </div>
-        <div>
-          <input ref={(ref) => { this.fileName = ref; }} type="text" placeholder="Enter the desired name of file" />
-        </div>
-        <br />
-        <div>
+          <input ref={(ref) => { this.uploadInput = ref; }} type="file" name="imageDatas" />
+          <input ref={(ref) => { this.fileName = ref; }} type="text" placeholder="Enter a decription" />
+          <br />
           <button>Upload</button>
-        </div>
-        <img src={this.state.imageURL} alt="img" />
+        
+       <img src={this.state.imageURL} alt="img" />
       </form>
     );
   }
 }
 
 export default Main;
+
