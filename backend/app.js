@@ -60,6 +60,24 @@ app.get('/user', function(req, res){
     })
 });
 
+//connection to get images from the db and display it on the frontend
+app.get('/imagePost', function(req, res){
+  debugger;
+  console.log(req.query.user__id)
+  const img = 'SELECT * FROM post WHERE user__id = ?';
+  const user = req.query.user__id
+  connection.query(img, user, function(error, result, field){
+    if(error) throw error;
+    console.log('here 1!', result);
+    const data= JSON.parse(JSON.stringify(result));
+    console.log(data);
+    console.log('here 2!');
+    return res.send(data);
+})
+})
+
+
+
 
   //connection to database for image
 app.post('/upload', function(req, res) {
@@ -75,9 +93,7 @@ app.post('/upload', function(req, res) {
     }
     const name = {
       image_data: `/public/images/${req.body.filename}.jpg` ,
-      date_added: '0001-11-11 00:00:00',
-      date_created: '0001-11-11 00:00:00',
-      user__id: 2
+      user__id: 68
     };
     console.log(name)
     connection.query('INSERT INTO post SET ?', name, (err, results, fields) => {
@@ -89,19 +105,33 @@ app.post('/upload', function(req, res) {
 })
 
 
-  //connection to database for input form
-  app.post('/userInfo', function(req, res) {
-  console.log(req.body);
-    const name = {
-      Name: req.body.name, 
-      email: req.body.email, 
-      location: req.body.location
+  // //connection to database for input form
+  // app.post('/userInfo', function(req, res) {
+  // console.log(req.body);
+  //   const name = {
+  //     Name: req.body.Name, 
+  //     email: req.body.email, 
+  //     location: req.body.location
+  //   };
+  //   connection.query('INSERT INTO user SET ?', name, (err, results, fields) => {
+  //     if(err) throw err;
+  //   })
+  // });
+
+  //connection from Auth0 profile info to import to  db
+app.post('/profile', function(req, res) {
+  console.log(req.body.email);
+    const formInfo = {
+      first_name: req.body.first_name,
+      last_name: req.body.last_name,
+      email: req.body.email,
+      date: req.body.date
     };
-    connection.query('INSERT INTO user SET ?', name, (err, results, fields) => {
+    connection.query('INSERT INTO user SET ?', formInfo, (err, results, fields) => {
       if(err) throw err;
+      res.send({banana: 3})
     })
   });
-
 
 
 // error handler for MySQL
