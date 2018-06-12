@@ -12,7 +12,6 @@ const mySqlKey = require('./keys').mySql
 const Date = require('node-datetime')
 const app = express();
 const dotenv = require('dotenv');
-
 const SELECT_IMAGE_QUERY = 'SELECT * FROM post'
 
 
@@ -61,46 +60,42 @@ app.get('/user', function(req, res){
 });
 
 //connection to get images from the db and display it on the frontend
-app.get('/imagePost', function(req, res){
+app.get('/imagePost', function (req, res) {
   debugger;
-  console.log(req.query.user__id)
   const img = 'SELECT * FROM post WHERE user__id = ?';
   const user = req.query.user__id
-  connection.query(img, user, function(error, result, field){
-    if(error) throw error;
-    console.log('here 1!', result);
-    const data= JSON.parse(JSON.stringify(result));
-    console.log(data);
-    console.log('here 2!');
+  connection.query(img, user, function (error, result, field) {
+    if (error) throw error;
+    const data = JSON.parse(JSON.stringify(result));
     return res.send(data);
-})
+  })
 })
 
 
 
 
   //connection to database for image
-app.post('/upload', function(req, res) {
+app.post('/upload', function (req, res) {
   console.log('in other upload')
   // res.json({thing: 'hi'})
   console.log(req.body)
 
   let imageFile = req.files.file;
 
-  imageFile.mv(`${__dirname}/public/images/${req.body.filename}.jpg`, function(err) {
+  imageFile.mv(`${__dirname}/public/images/${req.body.filename}.jpg`, function (err) {
     if (err) {
       return res.status(500).send(err);
     }
     const name = {
-      image_data: `/public/images/${req.body.filename}.jpg` ,
+      image_data: `/public/images/${req.body.filename}.jpg`,
       user__id: 68
     };
     console.log(name)
     connection.query('INSERT INTO post SET ?', name, (err, results, fields) => {
-      if(err) throw err;
+      if (err) throw err;
     })
-    
-    res.json({file: `public/images/${req.body.filename}.jpg`});
+
+    res.json({ file: `public/images/${req.body.filename}.jpg` });
   });
 })
 
@@ -119,28 +114,28 @@ app.post('/upload', function(req, res) {
   // });
 
   //connection from Auth0 profile info to import to  db
-app.post('/profile', function(req, res) {
+app.post('/profile', function (req, res) {
   console.log(req.body.email);
-    const formInfo = {
-      first_name: req.body.first_name,
-      last_name: req.body.last_name,
-      email: req.body.email,
-      date: req.body.date
-    };
-    connection.query('INSERT INTO user SET ?', formInfo, (err, results, fields) => {
-      if(err) throw err;
-      res.send({banana: 3})
-    })
-  });
+  const formInfo = {
+    first_name: req.body.first_name,
+    last_name: req.body.last_name,
+    email: req.body.email,
+    date: req.body.date
+  };
+  connection.query('INSERT INTO user SET ?', formInfo, (err, results, fields) => {
+    if (err) throw err;
+    res.send({ banana: 3 })
+  })
+});
 
 
 // error handler for MySQL
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
- // render the error page
+  // render the error page
   res.status(err.status || 500);
   res.render('error');
 });
