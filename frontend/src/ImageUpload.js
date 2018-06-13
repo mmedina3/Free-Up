@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
+import Main from './components/Main';
 import Navbars from './components/Navbars';
-import ImagePost from './components/ImagePost';
 
 
-class App extends Component {
+class ImageUpload extends Component {
  
   render() {
     return (
 <div>
   <Navbars auth={this.props.auth} history={this.props.history}/>
-  <ImagePost />
+  <Main />
+  {/* <PickCity /> */}
   </div>
     );
   }
 };
 
-export default App;
+export default ImageUpload;
+ 

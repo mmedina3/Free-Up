@@ -1,0 +1,27 @@
+.profile-area img {
+  max-width: 250px;
+  margin-bottom: 20px;
+  border-radius: 50%;
+}
+
+.info-container {
+display: flex;
+flex-direction: column;
+align-items: center;
+margin-top: 4%;
+}
+
+.profile-area {
+text-align: center;
+margin-top: 3%;
+}
+
+.user-info > h4 {
+text-align: left;
+}
+
+hr {
+border: none;
+height: 1px;
+background-color: rgb(163, 158, 158); /* Modern Browsers */
+}

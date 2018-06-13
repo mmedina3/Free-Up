@@ -1,0 +1,14 @@
+.navbar {
+    margin-bottom: 0px;
+    min-height: 69px;
+}
+
+.navbar-brand {
+    font-size: 2.2rem;
+    padding-top: 22px;
+}
+
+.navbar-nav > li > a {
+    padding-top: 22px;
+    font-size: 1.7rem;
+}
