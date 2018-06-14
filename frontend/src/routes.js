@@ -3,7 +3,6 @@ import { Route, Router, Switch } from 'react-router-dom';
 import { Redirect } from 'react-router-dom';
 import App from './App';
 import ImageUpload from './ImageUpload';
-//import Home from './Home/Home';
 import Callback from './Callback/Callback';
 import Auth from './Auth/Auth';
 import history from './history';
@@ -22,8 +21,6 @@ export const makeMainRoutes = () => {
 	return (
 		<Router history={history}>
 			<Switch>
-				{/* <Route path="/" render={(props) => <App auth={auth} {...props} />} /> */}
-				{/* <Route exact path="/home" render={(props) => <Home auth={auth} {...props} />} /> */}
 				<Route exact path="/callback" render={(props) => {
 					handleAuthentication(props);
 					return <Callback {...props} />

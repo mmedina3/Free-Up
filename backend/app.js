@@ -88,7 +88,8 @@ app.post('/upload', function (req, res) {
     }
     const name = {
       image_data: `/public/images/${req.body.filename}.jpg`,
-      user__id: 68
+      user__id: 68,
+      category: req.body.category
     };
     console.log(name)
     connection.query('INSERT INTO post SET ?', name, (err, results, fields) => {

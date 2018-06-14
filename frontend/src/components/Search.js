@@ -1,6 +1,8 @@
 import React from 'react';
 
+
 class Search extends React.Component {
+    
     render() {
         return (
             <form id="search_term" onSubmit={this.props.getSearch}>

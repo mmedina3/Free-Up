@@ -1,6 +1,6 @@
 import React from 'react';	
 //import { Redirect } from 'react-router-dom';
-
+import { Button } from 'react-bootstrap';
 
 
 // Images is an array of image search results
@@ -8,10 +8,11 @@ const Images = ({ images }) => (
 	<div>
 		<h1>Explore: </h1>
 		{images.map(function(imageSrc) {
-				 return  <img src={ imageSrc.image_data } width="300" height="300" alt="not available" />  
+				 return   <img src={ imageSrc.image_data } width="350" height="350"  class="img-fluid img-thumbnail" alt="not available" />  
 		}
 	)}
 	</div>
+	
 ) 
 
 

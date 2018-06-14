@@ -1,12 +1,12 @@
 import React from 'react';
 import PickCity from './PickCity';
 import { Modal, Button, DropdownButton, MenuItem } from 'react-bootstrap';
-
-
+import '../ImageUpload.css';
 
 
 
 class Main extends React.Component {
+
   constructor(props, context) {
     super(props, context);
 
@@ -18,6 +18,8 @@ class Main extends React.Component {
     this.handleClose = this.handleClose.bind(this);
     this.handleUploadImage = this.handleUploadImage.bind(this);
   }
+
+
 
   handleUploadImage(ev) {
     ev.preventDefault();
@@ -31,7 +33,7 @@ class Main extends React.Component {
     console.log(JSON.stringify(data))
     fetch('/upload', {
       method: 'POST',
-      body: data
+      body: data,
     }).then((response) => {
       //console.log(response.json())
       response.json().then((body) => {
@@ -42,36 +44,44 @@ class Main extends React.Component {
     this.setState({ show: false });
   }
   handleClose() {
-  //   this.handleUploadImage;
-  //   console.log('This works- image has been uploaded')
     this.setState({ show: false });
   }
 
   handleShow() {
     this.setState({ show: true });
   }
+
+
+  goTo(route) {
+    this.props.history.replace(`/${route}`)
+}
+
   render() {
     return (
 
-      <div>
-        <h1>Item Uploader</h1>
+      <div id="center">
+        <h1>Post Item! </h1>
           <input ref={(ref) => { this.uploadInput = ref; }} type="file" name="imageDatas" />
           <input ref={(ref) => { this.fileName = ref; }} type="text" placeholder="Enter Title" />
+          <br />
           <img src={this.state.imageURL} width="300" height="300" alt="img" />
-          <PickCity />
-
-
+          <br />
         <Button bsStyle="primary" bsSize="sm" onClick={this.handleShow}>
           Upload
+        </Button>
+        <Button eventKey={2} bsStyle="primary" bsSize="sm" href="ImageUpload"
+          onClick={this.goTo.bind(this, 'ImageUpload')}
+        > New Post
         </Button>
 
         <div>
           <Modal show={this.state.show} onHide={this.handleClose}>
             <Modal.Header closeButton>
-              <Modal.Title>Pick a Size!</Modal.Title>
+              <Modal.Title>1. Pick a Size!</Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <h4>Clothes: </h4>
+              <h5>* Measurements shown refer to age/body measurements and not clothing measurements. </h5>
               
                 <DropdownButton title='Infant' id='dropdown'>
                   <MenuItem eventKey="1">0 months</MenuItem>
@@ -87,8 +97,7 @@ class Main extends React.Component {
               
            
                 <DropdownButton title='Baby' id='dropdown'>
-                  <MenuItem eventKey="1">9-12 months (31.5 INCHES)</MenuItem>
-                  <MenuItem eventKey="2">12-18 months (33,0 INCHES)</MenuItem>
+                  <MenuItem eventKey="2">12-18 months (33,9 INCHES)</MenuItem>
                   <MenuItem eventKey="3">18-24 months (36,2 INCHES)</MenuItem>
                   <MenuItem eventKey="4">2-3 years (38,6 INCHES)</MenuItem>
                   <MenuItem eventKey="5">3-4 years (40,9 INCHES)</MenuItem>
@@ -150,7 +159,23 @@ class Main extends React.Component {
                   <MenuItem eventKey="12">7 (14 years)</MenuItem>
                   <MenuItem eventKey="13">7.5 (14 years) </MenuItem>
                 </DropdownButton>
-          
+
+                 <hr />
+                 <Modal.Title>2. Choose a category:  </Modal.Title>
+                 <hr />
+                 <select>
+                 <option disable selected value> Category </option>
+                  <option  name="category" value='Clothes'>CLOTHES</option>
+                  <option  name="category" value='Home'>HOME</option>
+                  <option  name="category" value='Travel'>TRAVEL</option>
+                  <option  name="category" value='Education'>EDUCATION</option>
+                  <option  name="category" value='Play'>PLAY</option>
+                  </select>
+                 <hr />
+                 <Modal.Title>3. Select a City:  </Modal.Title>
+                 <hr />
+                 <PickCity />
+
             </Modal.Body>
             <Modal.Footer>
               <Button onClick={this.handleUploadImage}>Done!</Button>

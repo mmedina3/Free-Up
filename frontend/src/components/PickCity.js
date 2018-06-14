@@ -14,7 +14,7 @@ const POSTMAN_KEY = process.env.REACT_APP_POSTMAN;
 
 class PickCity extends React.Component{
 
-  // The following code is for the Imageuploader
+  // The following code is for the City search
   state = {
       city: undefined,
       error: undefined

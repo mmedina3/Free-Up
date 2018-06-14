@@ -38,5 +38,8 @@
     "react-fontawesome": "^1.6.1",
     "react-onclickoutside": "^6.7.1",
     "serve-favicon": "~2.4.5"
+  },
+  "devDependencies": {
+    "jest": "^23.1.0"
   }
 }
