@@ -1,6 +1,6 @@
 import React from 'react';	
 //import { Redirect } from 'react-router-dom';
-import { Button } from 'react-bootstrap';
+//import { Button } from 'react-bootstrap';
 
 
 // Images is an array of image search results

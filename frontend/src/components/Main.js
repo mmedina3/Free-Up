@@ -1,7 +1,7 @@
 import React from 'react';
 import PickCity from './PickCity';
-import { Modal, Button, DropdownButton, MenuItem } from 'react-bootstrap';
-import '../ImageUpload.css';
+import { Modal, Button,FormGroup, ControlLabel, FormControl, DropdownButton, MenuItem } from 'react-bootstrap';
+//import '../ImageUpload.css';
 
 
 
@@ -12,14 +12,18 @@ class Main extends React.Component {
 
     this.state = {
       imageURL: '',
-      show: false
+      show: false,
+      category: 'cactus'
     };
     this.handleShow = this.handleShow.bind(this);
     this.handleClose = this.handleClose.bind(this);
     this.handleUploadImage = this.handleUploadImage.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
-
+  handleChange(e) {
+    this.setState({ category: e.target.value });
+  }
 
   handleUploadImage(ev) {
     ev.preventDefault();
@@ -28,6 +32,7 @@ class Main extends React.Component {
     console.log(this.uploadInput.files[0]);
     data.append('file', this.uploadInput.files[0]);
     data.append('filename', this.fileName.value);
+    data.append('category', this.state.category);
 
     console.log(data)
     console.log(JSON.stringify(data))
@@ -43,6 +48,7 @@ class Main extends React.Component {
     });
     this.setState({ show: false });
   }
+
   handleClose() {
     this.setState({ show: false });
   }
@@ -50,7 +56,6 @@ class Main extends React.Component {
   handleShow() {
     this.setState({ show: true });
   }
-
 
   goTo(route) {
     this.props.history.replace(`/${route}`)
@@ -163,14 +168,25 @@ class Main extends React.Component {
                  <hr />
                  <Modal.Title>2. Choose a category:  </Modal.Title>
                  <hr />
-                 <select>
+                 {/* <select>
                  <option disable selected value> Category </option>
                   <option  name="category" value='Clothes'>CLOTHES</option>
                   <option  name="category" value='Home'>HOME</option>
                   <option  name="category" value='Travel'>TRAVEL</option>
                   <option  name="category" value='Education'>EDUCATION</option>
                   <option  name="category" value='Play'>PLAY</option>
-                  </select>
+                  </select> */}
+    <FormGroup controlId="formControlsSelect">
+      <ControlLabel>Select</ControlLabel>
+      <FormControl onChange={this.handleChange}
+      componentClass="select" placeholder="Select:">
+        <option value="clothes">Clothes</option>
+        <option value="home">Home</option>
+        <option value="travel">Travel</option>
+        <option value="education">Education</option>
+        <option value="play">Play</option>
+      </FormControl>
+    </FormGroup>
                  <hr />
                  <Modal.Title>3. Select a City:  </Modal.Title>
                  <hr />
