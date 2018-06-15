@@ -29,7 +29,6 @@ const connection = mysql.createConnection({
   database: 'freeup_db'
 });
 
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -41,7 +40,6 @@ app.use(cors());
 app.use(cookieParser());
 app.use(fileUpload());
 app.use('/public', express.static(__dirname + '/public'));
-
 
 //needed to connect with db
   connection.connect((err) => {
@@ -62,17 +60,14 @@ app.get('/user', function(req, res){
 //connection to get images from the db and display it on the frontend
 app.get('/imagePost', function (req, res) {
   debugger;
-  const img = 'SELECT * FROM post WHERE user__id = ?';
-  const user = req.query.user__id
+  const img = 'SELECT * FROM post WHERE post_city = ?';
+  const user = req.query.post_city
   connection.query(img, user, function (error, result, field) {
     if (error) throw error;
     const data = JSON.parse(JSON.stringify(result));
     return res.send(data);
   })
 })
-
-
-
 
   //connection to database for image
 app.post('/upload', function (req, res) {
@@ -88,8 +83,15 @@ app.post('/upload', function (req, res) {
     }
     const name = {
       image_data: `/public/images/${req.body.filename}.jpg`,
-      user__id: 68,
-      category: req.body.category
+      user__id: 71,
+      category: req.body.category,
+      infant_clothes: req.body.infant_clothes,
+      infant_shoe: req.body.infant_shoe,
+      baby_clothes: req.body.baby_clothes,
+      baby_shoe: req.body.baby_shoe,
+      kids_clothes: req.body.kids_clothes,
+      kids_shoe: req.body.kids_shoe,
+      post_city: null
     };
     console.log(name)
     connection.query('INSERT INTO post SET ?', name, (err, results, fields) => {
@@ -99,7 +101,6 @@ app.post('/upload', function (req, res) {
     res.json({ file: `public/images/${req.body.filename}.jpg` });
   });
 })
-
 
   // //connection to database for input form
   // app.post('/userInfo', function(req, res) {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Navbars from './components/Navbars';
 import ImagePost from './components/ImagePost';
+import './App.css';
 
 
 class App extends Component {

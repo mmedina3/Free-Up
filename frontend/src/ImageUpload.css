@@ -1,10 +1,20 @@
-@import url("https://fonts.googleapis.com/css?family=Nothing+You+Could+Do");
+@import url('https://fonts.googleapis.com/css?family=Indie+Flower');
+
+body {
+  font-family: 'Indie Flower', cursive;
+
+ }
 
 #center {
-  position: middle;
-  font-family: 'Nothing You Could Do', cursive;
+  text-align: center;
+  font-family: 'Indie Flower', cursive;
+  font-size: large;
   border-top: 4px solid yellow;
   border-bottom: 4px solid yellow; }
+
+  #modal {
+    text-align: left;
+  }
 
 /*top part of the screen*/
 section {

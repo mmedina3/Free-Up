@@ -1,6 +1,8 @@
 import React from 'react';	
 //import { Redirect } from 'react-router-dom';
 //import { Button } from 'react-bootstrap';
+import '../App.css';
+
 
 
 // Images is an array of image search results
@@ -28,7 +30,7 @@ class ImagePost extends React.Component {
 	handleSearch = (e) => {
 		e.preventDefault();
 	 const searchTerm = e.target.search.value; 
-	 fetch(`/imagePost/?user__id=${searchTerm}`,{
+	 fetch(`/imagePost/?post_city=${searchTerm}`,{
 			method: 'GET'
 		}).then((response)=>{
 			response.json().then((body) => {

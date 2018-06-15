@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/css?family=Indie+Flower');
+
+body {
+  font-family: 'Indie Flower', cursive;
+
+ }
+
 
 .btn-margin {
     margin: 7px 3px;
