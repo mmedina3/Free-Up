@@ -103,10 +103,14 @@ class Main extends React.Component {
 
       <div id="center">
         <h1>Post Item! </h1>
-          <input ref={(ref) => { this.uploadInput = ref; }} type="file" name="imageDatas" align ="center" />
-          <input ref={(ref) => { this.fileName = ref; }} type="text" placeholder="Enter Title" align ="center"/>
+        <br />
+        <div class='centerFile'>
+          <input ref={(ref) => { this.uploadInput = ref; }} type="file" name="imageDatas"  />
+          </div>
+          <input ref={(ref) => { this.fileName = ref; }} type="text" placeholder="Enter Title" />
+
           <br />
-          <img src={this.state.imageURL} width="300" height="300" alt="img" align ="center" />
+          <img src={this.state.imageURL} width="300" height="300" alt="img" />
           <br />
         <Button bsStyle="primary" bsSize="lg" onClick={this.handleShow}>
           Upload

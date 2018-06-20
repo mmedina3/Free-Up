@@ -10,7 +10,15 @@ body {
   font-family: 'Indie Flower', cursive;
   font-size: large;
   border-top: 4px solid yellow;
-  border-bottom: 4px solid yellow; }
+  border-bottom: 4px solid yellow; 
+
+}
+
+  .centerFile {
+    width: 100px;  /* Or whatever */
+    height: 100px; /* Or whatever */
+    margin: auto; 
+   }
 
   #modal {
     text-align: left;

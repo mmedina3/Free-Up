@@ -10,6 +10,7 @@ class App extends Component {
     return (
 <div>
   <Navbars auth={this.props.auth} history={this.props.history}/>
+  <br />
   <ImagePost />
   </div>
     );
