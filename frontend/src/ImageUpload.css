@@ -2,7 +2,7 @@
 
 body {
   font-family: 'Indie Flower', cursive;
-
+  background-image: url("./backgroundimage/marble.png");
  }
 
 #center {
@@ -29,7 +29,7 @@ section {
   border-bottom: 4px solid yellow;
   width: 45%;
   left: 5%;
-  right: 5%;
+  right: 5%;33
   float: left;
   position: relative;
   overflow: auto;
