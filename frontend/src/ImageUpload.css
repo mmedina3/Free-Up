@@ -11,6 +11,8 @@ body {
   font-size: large;
   border-top: 4px solid yellow;
   border-bottom: 4px solid yellow; 
+  background-color: white;
+  opacity: 0.87;;
 
 }
 
